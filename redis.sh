@@ -28,9 +28,14 @@ port $port
 cluster-enabled yes
 cluster-config-file nodes.conf
 cluster-node-timeout 5000
-appendonly yes
+
+# Disable persistence so that data is not saved to disk
+save ""
+appendonly no
+
 protected-mode no
 bind 127.0.0.1
+maxclients 100000
 EOF
     $REDIS_SVR ./$port/redis.conf --daemonize yes --dir ./$port
   done
@@ -45,7 +50,7 @@ elif [ "$CMD" == "-stop" ]; then
   for port in $(seq 7000 7029); do
     $REDIS_CLI -p $port shutdown 2>/dev/null
   done
-  sudo pkill -9 redis6-server 2>/dev/null
+  sudo pkill -9 $REDIS_SVR 2>/dev/null
 
 elif [ "$CMD" == "-resume" ]; then
   # Adjusted to point to the correct relative path

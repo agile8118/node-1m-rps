@@ -235,6 +235,17 @@ app.route("post", "/code-ultra-fast", async (req, res) => {
   res.status(201).json({ created_code: { id, code, created_at } });
 });
 
+// Just writes a dummy random generated data to Redis.
+// Used to test max req/s we can handle with Redis alone.
+app.route("post", "/ultra-fast", async (req, res) => {
+  const id = crypto.randomUUID();
+  const data = crypto.randomBytes(32).toString("hex"); // 64 bytes of data
+
+  await redis.set(`{ultra:${id}}`, data);
+
+  res.status(201).json({ id, data });
+});
+
 app.route("get", "/code-ultra-fast", async (req, res) => {
   let shard = Math.floor(Math.random() * 15);
   let randomId = null;

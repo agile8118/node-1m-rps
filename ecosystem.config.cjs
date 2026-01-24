@@ -6,8 +6,8 @@ module.exports = {
       instances: "max",
       exec_mode: "cluster",
       env: {
-        NODE_ENV: "development",
-        REDIS_CLUSTER_MODE: "true",
+        NODE_ENV: "production",
+        REDIS_CLUSTER: "true",
       },
     },
   ],
