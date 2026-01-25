@@ -10,8 +10,8 @@ process.title = "node-cpeak";
 
 app.beforeEach(parseJSON({ limit: 1024 * 1024 }));
 
-app.route("get", `/simple`, async (req, res) => {
-  await res.json({ message: "hi" });
+app.route("get", `/simple`, (req, res) => {
+  res.json({ message: "hi" });
 });
 
 app.route("patch", `/update-something/:id/:name`, (req, res) => {

@@ -10,8 +10,8 @@ process.title = "node-express";
 
 app.use(express.json({ limit: "1mb" }));
 
-app.get(`/simple`, async (req, res) => {
-  await res.json({ message: "hi" });
+app.get(`/simple`, (req, res) => {
+  res.json({ message: "hi" });
 });
 
 app.patch(`/update-something/:id/:name`, (req, res) => {
