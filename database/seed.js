@@ -13,6 +13,7 @@ This will insert 20 million records.
 import { Pool } from "pg";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import keys from "./keys.js";
 import { generateCode } from "../utils.js";
 
@@ -73,7 +74,7 @@ try {
   process.exit(1);
 }
 
-const databasePath = new URL("./", import.meta.url).pathname;
+const databasePath = fileURLToPath(new URL("./", import.meta.url));
 
 // Create the table(s)
 (async () => {
